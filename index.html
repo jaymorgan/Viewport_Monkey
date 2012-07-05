@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	
+	<title>Viewport Monkey</title>
+	<meta name="description" content="Viewport Monkey - Viewport Size Display">
+	<meta name="author" content="Jason Morgan">
+	
+	<link rel="stylesheet" href="css/basic.css" id="basic-css">
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="js/viewport_monkey-0.1.js"></script>
+</head>
+<body>
+	<header class="content">
+		Use Viewport Monkey to see the size of the window. 
+	</header>
+	<script>
+		
+			function viewportMonkeyInit() {
+				var numsDiv = "<div class='monkeynums'>Viewport Size: <input type='counter' name='wSRcounter' class='monkeyReadout' value='-init-' /></div>";
+				$(numsDiv).appendTo($('body'));
+				
+				$('.monkeynums').css({
+					'background-color' : 'black',
+					'font-family': 'sans-serif',
+					'font-weight' : 'bolder',
+					'position': 'fixed',
+					'bottom': '0px',
+					'left': '0px',
+					'color': 'white',
+					'padding': '8px'
+				});
+				
+				var win = $(window);
+				var windwidth;
+				
+				win.on('resize', function() {
+					calculateSize();
+				});
+				
+				function resizeWindow() {
+					$('input.monkeyReadout').val(windwidth);
+				};
+				function calculateSize() {
+					windwidth = win.width();
+					resizeWindow();
+				}
+			}
+			viewportMonkeyInit();
+	</script>
+
+</body>
+</html>
