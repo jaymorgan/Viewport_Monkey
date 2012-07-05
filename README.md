@@ -15,6 +15,11 @@ and link to the "viewport_monkey-0.1.js" file. Something like...
 
 Then monkey will be added to the bottom of your viewport.
 
+View Demo
+=========
+
+Example can be found at [jmorgan.ws/viewport_monkey](http://jmorgan.ws/viewport_monkey/index.html "Monkeys!")
+
 Coming soon
 ===========
 
