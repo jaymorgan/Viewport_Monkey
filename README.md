@@ -3,7 +3,7 @@ Viewport_Monkey
 
 Add a div and monkey to an HTML page to show you the viewport size
 
-Handy for developing a Responsive Design, to see the size of the viewport when the window resizes.
+Handy for developing a Responsive Design, to see the size of the viewport when your page layout breaks, giving you a number to base a media query on. I used something like this to develop my portfolio site and found it very useful. 
 
 Just link to jQuery... 
 
@@ -28,4 +28,4 @@ Coming soon
 Disclaimer
 ==========
 
-I don't actually know what I'm doing so if you want to help, hit me up. 
+I don't have a ton of time to spend on this but I'm hoping to work on it more. Cheers!
