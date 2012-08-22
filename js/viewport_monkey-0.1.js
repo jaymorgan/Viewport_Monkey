@@ -1,4 +1,9 @@
 function vpm_viewportMonkeyInit() {
+	
+	$(document).ready(function () {
+	    $('head').append('<link rel="stylesheet" href="css/vpm_ViewportMonkeyStyles.css" type="text/css" />');
+	});
+	
 	var vpm_numsDiv = "<div class='positiontopleft vpm_monkeynums'>	Viewport Width:<input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-' /><select id='vpm_monkeyUnits'><option value='px'>px</option><option value='em'>em</option></select><button class='vpm_changepos'>move</button></div>";
 	
 	$(vpm_numsDiv).appendTo($('body'));
