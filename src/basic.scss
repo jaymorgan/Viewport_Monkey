@@ -1,0 +1,36 @@
+
+@import "compass/css3";
+
+@import "compass/utilities";
+
+
+body {
+	background-color: lightgrey;
+}
+
+header {
+	margin: 30px auto;
+	text-align: center;
+}
+
+@media screen and (min-width: 901px){
+	header{
+		font-size: 3em;
+	}
+}
+
+@media screen and (min-width: 641px) and (max-width: 900px){
+	header{
+		font-size: 2em;
+	}
+}
+
+@media screen and (max-width: 640px){
+	header{
+		font-size: 1em;
+	}
+}
+
+.output {
+	@include border-top-right-radius(6px);
+}
