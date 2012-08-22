@@ -1,0 +1,23 @@
+/* line 1, ../src/vpm_ViewportMonkeyStyles.scss */
+#nums {
+  position: absolute; }
+
+/* line 5, ../src/vpm_ViewportMonkeyStyles.scss */
+.positiontopleft {
+  top: -6px;
+  left: -6px; }
+
+/* line 9, ../src/vpm_ViewportMonkeyStyles.scss */
+.positiontopright {
+  top: -6px;
+  right: -6px; }
+
+/* line 13, ../src/vpm_ViewportMonkeyStyles.scss */
+.positionbottomleft {
+  bottom: -6px;
+  left: -6px; }
+
+/* line 17, ../src/vpm_ViewportMonkeyStyles.scss */
+.positionbottomright {
+  bottom: -6px;
+  right: -6px; }
