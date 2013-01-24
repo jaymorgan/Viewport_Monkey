@@ -1,6 +1,6 @@
 /* line 7, ../src/basic.scss */
 body {
-  background-color: lightgrey; }
+  background: #dddddd url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/light_toast.png); }
 
 /* line 11, ../src/basic.scss */
 header {
@@ -23,6 +23,4 @@ header {
 .output {
   -moz-border-radius-topright: 6px;
   -webkit-border-top-right-radius: 6px;
-  -ms-border-top-right-radius: 6px;
-  -o-border-top-right-radius: 6px;
   border-top-right-radius: 6px; }

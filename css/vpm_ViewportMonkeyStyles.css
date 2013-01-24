@@ -1,23 +1,33 @@
-/* line 1, ../src/vpm_ViewportMonkeyStyles.scss */
-#nums {
-  position: absolute; }
-
-/* line 5, ../src/vpm_ViewportMonkeyStyles.scss */
-.positiontopleft {
-  top: 3px;
-  left: 3px; }
-
-/* line 9, ../src/vpm_ViewportMonkeyStyles.scss */
-.positiontopright {
-  top: 3px;
-  right: 3px; }
-
-/* line 13, ../src/vpm_ViewportMonkeyStyles.scss */
-.positionbottomleft {
-  bottom: 3px;
-  left: 3px; }
-
-/* line 17, ../src/vpm_ViewportMonkeyStyles.scss */
-.positionbottomright {
-  bottom: 3px;
-  right: 3px; }
+/* line 8, ../src/vpm_ViewportMonkeyStyles.scss */
+div.vpm_monkeynums {
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: .7em;
+  font-family: sans-serif;
+  position: fixed;
+  color: white;
+  padding: 8px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  top: auto;
+  left: 3px;
+  right: auto;
+  bottom: -13px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 1s;
+  -moz-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  transition-duration: 1s;
+  -webkit-transition-timing-function: ease-in;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in; }
+  /* line 23, ../src/vpm_ViewportMonkeyStyles.scss */
+  div.vpm_monkeynums input {
+    background: transparent;
+    border: none;
+    font-size: 2em; }

@@ -1,20 +1,33 @@
-#nums {
-  position: absolute;
-}
+@import "compass";
 
-.positiontopleft {
-	top: 3px;
-  left: 3px;
-}
-.positiontopright {
-  top: 3px;
-  right: 3px;
-}
-.positionbottomleft {
-  bottom: 3px;
-  left: 3px;
-}
-.positionbottomright {
-  bottom: 3px;
-  right: 3px;
+// .positiontopleft { top: 3px; left: 3px;}
+// .positiontopright { top: 3px; right: 3px; }
+// .positionbottomleft { bottom: 3px; left: 3px; }
+// .positionbottomright { bottom: 3px; right: 3px; }
+
+div.vpm_monkeynums {
+	background-color: rgba(black, 0.4);
+	font-size: .7em;
+	font-family: sans-serif;
+	position: fixed;
+	color: white;
+	padding: 8px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	top: auto;
+	left: 3px;
+	right: auto;
+	bottom: -13px;
+	input{
+		//position: absolute;
+		background: transparent;
+		border: none;
+		font-size: 2em;
+		//top: -20px;
+	}
+	@include transition-property(all);
+	@include transition-duration(1s);
+	@include transition-timing-function(ease-in);
 }
