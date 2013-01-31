@@ -12,30 +12,45 @@
 function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		
 	$(document).ready(function () {
-	    $('head').append('<link rel="stylesheet" href="css/vpm_ViewportMonkeyStyles.css" type="text/css" />');
+	    // $('head').append('<link rel="stylesheet" href="css/vpm_ViewportMonkeyStyles.css" type="text/css" />');
 	});
 	
-	var vpm_numsDiv = "<div class='vpm_monkeynums'>Viewport Width:<input type='counter' name='wSRcounter'class='vpm_monkeyReadout' value='-init-' /><select id='vpm_monkeyUnits'><option value='px'>px</option><option value='em'>em</option></select><button class='vpm_changepos'>move</button></div>";
-	var vpm_numsDiv1 = "<div class='vpm_monkeynums_min'><input type='counter' name='wSRcounter'class='vpm_monkeyReadout' value='-init-' /><select id='vpm_monkeyUnits'><option value='px'>px</option><option value='em'>em</option></select><a href='#' class='vpm_arrow'></a></div>";
+	var vpm_numsDiv = "<div class='vpm_monkeynums'><input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-'><a href='#' id='vpm_monkeyUnits'>px</a><a href='#' id='vpm_arrow'></a></div>";
 	
 	$(vpm_numsDiv).appendTo($('body'));
 	
 	var vpm_monkeynums = $('.vpm_monkeynums');
-	
-	// vpm_monkeynums.css({
-	// 	'background-color' : 'rgba(0,0,0,0.4)',
-	// 	'font-family': 'sans-serif',
-	// 	'font-weight' : 'bolder',
-	// 	'position': 'absolute',
-	// 	'color': 'white',
-	// 	'padding': '8px',
-	// 	'-moz-border-radius': '6px',
-	// 	'-webkit-border-radius': '6px',
-	// 	'-ms-border-radius': '6px',
-	// 	'-o-border-radius': '6px',
-	// 	'border-radius': '6px'
-	// });
-	
+	var vpm_monkeyReadout = $('.vpm_monkeyReadout');
+	var vpm_monkeyUnitsButton = $('#vpm_monkeyUnits');
+
+	vpm_monkeynums.css({
+		'background-color' : 'rgba(0,0,0,0.4)',
+		'font-family': 'sans-serif',
+		'font-weight' : 'bolder',
+		'position': 'absolute',
+		'color': 'white',
+		'padding': '8px',
+	});
+
+	vpm_monkeyReadout.css({
+		'background-color': 'transparent',
+		'border': 'none',
+		'width': '60px',
+		'color': 'orange',
+		'text-shadow': '0px 1px 2px rgba(0,0,0,0.5)',
+		'font-size': '1.4em',
+		'text-align': 'right'
+	});
+
+	vpm_monkeyUnitsButton.css({
+		'padding': '4px',
+		'border': '1px solid #333',
+		'background': '#ddd',
+		'color': '#333',
+		'text-decoration': 'none',
+		'border-radius' : '4px'
+	});
+
 	var initpos_v = initial_position_vert;
 	var initpos_h = initial_position_hori;
 	var ipos;
@@ -166,7 +181,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 				'top' : 'auto',
 				'left' : '3px',
 				'right' : 'auto',
-				'bottom' : '-10px'
+				'bottom' : '3px'
 			});
 		}
 		if (pos === 'bottomright') {
@@ -174,7 +189,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 				'top' : 'auto',
 				'left' : 'auto',
 				'right' : '3px',
-				'bottom' : '-10px'
+				'bottom' : '3px'
 			});
 		}
 	}
