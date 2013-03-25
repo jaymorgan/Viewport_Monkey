@@ -15,13 +15,15 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	    // $('head').append('<link rel="stylesheet" href="css/vpm_ViewportMonkeyStyles.css" type="text/css" />');
 	});
 	
-	var vpm_numsDiv = "<div class='vpm_monkeynums'><input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-'><a href='#' id='vpm_monkeyUnits'>px</a><a href='#' id='vpm_arrow'></a></div>";
+	var vpm_numsDiv = "<div class='vpm_monkeynums'><input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-'><a href='#' id='vpm_monkeyUnits'>px</a><a href='#' id='vpm_arrowButton'><div id='vpm_arrow'></div></a></div>";
 	
 	$(vpm_numsDiv).appendTo($('body'));
 	
 	var vpm_monkeynums = $('.vpm_monkeynums');
 	var vpm_monkeyReadout = $('.vpm_monkeyReadout');
 	var vpm_monkeyUnitsButton = $('#vpm_monkeyUnits');
+	var vpm_monkeyMoveButton = $('#vpm_arrowButton');
+	var vpm_monkeyMoveArrow = $('#vpm_arrow');
 
 	vpm_monkeynums.css({
 		'background-color' : 'rgba(0,0,0,0.4)',
@@ -29,27 +31,61 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		'font-weight' : 'bolder',
 		'position': 'absolute',
 		'color': 'white',
-		'padding': '8px',
+		'padding': '4px 14px',
 	});
 
 	vpm_monkeyReadout.css({
 		'background-color': 'transparent',
 		'border': 'none',
 		'width': '60px',
+		'margin': '0',
+		'padding': '2px 8px 0 0',
 		'color': 'orange',
 		'text-shadow': '0px 1px 2px rgba(0,0,0,0.5)',
 		'font-size': '1.4em',
-		'text-align': 'right'
+		'text-align': 'right',
+		'vertical-align': 'top'
 	});
 
 	vpm_monkeyUnitsButton.css({
 		'padding': '4px',
-		'border': '1px solid #333',
-		'background': '#ddd',
-		'color': '#333',
+		'border': '1px solid #ff5a00',
+		'background': 'rgba(#333333, 0.5)',
+		'color': 'orange',
+		'text-shadow': '0px 1px 2px rgba(0,0,0,0.5)',
 		'text-decoration': 'none',
-		'border-radius' : '4px'
+		'border-radius' : '4px',
+		'display': 'inline-block',
+		'width': '24px',
+		'text-align': 'center',
+		'margin-right': '8px'
 	});
+
+	vpm_monkeyMoveButton.css({
+		'display': 'inline-block',
+		'background': 'transparent',
+		'padding': '0',
+		'text-align': 'center',
+		'vertical-align': 'bottom'
+	});
+
+	vpm_monkeyMoveArrow.hover(function (){
+		this.css({
+			'border-bottom-color': '#895810'
+		});
+	});
+
+	vpm_monkeyMoveArrow.css({
+		'display': 'block',
+		'margin': '6px',
+		'padding': '0',
+		'width': '0',
+		'height': '0',
+		'border-left': '8px solid transparent',
+		'border-right': '8px solid transparent',
+		'border-bottom': '16px solid orange'
+	});
+
 
 	var initpos_v = initial_position_vert;
 	var initpos_h = initial_position_hori;
@@ -94,7 +130,14 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	vpm_monkeySelector.on('change', function(){
 		vpm_calculateSize();
 	});
-	
+
+	// Unit Switch Button Event
+	vpm_monkeyUnitsButton.on("click", function(event){
+		event.preventDefault();
+		if (this.innerHTML == 'px') {this.innerHTML = 'em'} else{this.innerHTML = 'px'};
+		vpm_calculateSize();
+	});
+
 	function vpm_windowWidthOutput() {
 		$('input.vpm_monkeyReadout').val(vpm_windwidth);
 	};
@@ -102,8 +145,9 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	// Pulls the size of the viewport and converts to EMs if its set to show EMs
 	function vpm_calculateSize() {
 		vpm_windwidth = vpm_win.width();
+		// Get the value of the Units Toggle Button
 		var vpm_units = vpm_checkMonkeyUnits();
-		// If the dropdown is set to EMs this if capturesthat and translated the numbers to EMs
+		// If the toggle is set to EMs this if captures that and translated the numbers to EMs
 		if (vpm_units == 'em') {
 			var vpm_emSize = $('body').css('font-size');
 			var vpm_emWidth = vpm_windwidth / parseInt(vpm_emSize);
@@ -114,7 +158,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	
 	// Checks to see what the units dropdown is set to
 	function vpm_checkMonkeyUnits() {
-		var vpm_currentUnits = vpm_monkeySelector.val();
+		var vpm_currentUnits = vpm_monkeyUnitsButton.html();
 		return vpm_currentUnits;
 	}
 	
@@ -144,14 +188,13 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	
 	function checkPostion(){
 		var oldClass = positions[currentPosition];
-		console.log(oldClass);
 		currentPosition++;
 		if(currentPosition >= positions.length){
 			currentPosition =0;
 		}
 		return currentPosition;
 	}
-	
+
 	// Move Button Event
 	vpm_movebtn.on("click", function(event){
 		var thing = checkPostion();
@@ -159,7 +202,6 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	});
 	
 	function vpm_setNewClass(pos) {
-		console.log('here - ' + pos);
 		if (pos === 'topleft') {
 			vpm_monkeynums.css({
 				'top' : '3px',

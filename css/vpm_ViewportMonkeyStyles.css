@@ -31,3 +31,31 @@ div.vpm_monkeynums {
     background: transparent;
     border: none;
     font-size: 2em; }
+  /* line 34, ../src/vpm_ViewportMonkeyStyles.scss */
+  div.vpm_monkeynums .arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid black; }
+  /* line 43, ../src/vpm_ViewportMonkeyStyles.scss */
+  div.vpm_monkeynums .arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid red; }
+  /* line 52, ../src/vpm_ViewportMonkeyStyles.scss */
+  div.vpm_monkeynums .arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 60px solid transparent;
+    border-bottom: 60px solid transparent;
+    border-left: 60px solid green; }
+  /* line 61, ../src/vpm_ViewportMonkeyStyles.scss */
+  div.vpm_monkeynums .arrow-left {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid blue; }
