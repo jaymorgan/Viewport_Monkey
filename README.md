@@ -1,29 +1,22 @@
 Viewport_Monkey
 ===============
 
-Adds a div and a monkey to display the viewport size to make finding breakpoints in Responsive Design easier.
+This is a handy utility that just adds a simple readout to the corner of your page that tells you what the viewport width is. Great for designing a responsive sites in the browser. I don't work with standard breakpoints like some designers. I fix elements on the screen when they need fixing or when they look _a little off_. This utility makes it easy to find a good breakpoint for your media queries. 
 
-When your page layout breaks, it gives you a number to base a media query on. I used a very early version of this to develop my portfolio site and found it very useful. 
+## Requirements
 
-This requires jQuery.
-`<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>`
+This plugin requires __jQuery__.
 
-and link to the "viewport_monkey-0.1.js" file.
-`<script src="js/viewport_monkey-0.1.js"></script>`
+## Installation
 
+Just add the __viewport_monkey-v1.js__ file to your HTML
 Then monkey will be added to the bottom of your viewport.
 
-View Demo
-=========
+## Features
+
+Use the "_px_" button to switch between Pixels and EMs and the arrow buttons to move the Monkey around the screen. 
+
+## View Demo
 
 Example can be found at [jmorgan.ws/viewport_monkey](http://jmorgan.ws/viewport_monkey/index.html "Monkeys!")
 
-Coming soon
-===========
-
-1. The monkey!
-
-Disclaimer
-==========
-
-I don't have a ton of time to spend on this but I'm hoping to work on it more. Cheers!
