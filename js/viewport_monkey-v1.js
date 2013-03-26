@@ -6,7 +6,7 @@
 
 // Send properties as "bottom", "top" for the vert prop
 // Send "left" and "right" for the horizontal prop
-// If not set or not set coeerctly they will default to the bottom left
+// If not set or not set correctly they will default to the bottom left
 (function( $ ) {
 
 function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
