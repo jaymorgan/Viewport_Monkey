@@ -34,3 +34,9 @@ header {
 .output {
 	@include border-top-right-radius(6px);
 }
+
+.themonkey {
+	margin: 0 auto;
+	display: block;
+	max-width: 100%;
+}

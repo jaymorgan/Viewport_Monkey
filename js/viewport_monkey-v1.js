@@ -1,5 +1,5 @@
 /*
-	Viewport Monkey v0.2
+	Viewport Monkey v1
 	Author: Jason Morgan
 	Twitter: @jaymorgan
 */
@@ -15,16 +15,24 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	    // $('head').append('<link rel="stylesheet" href="css/vpm_ViewportMonkeyStyles.css" type="text/css" />');
 	});
 	
+	// The Monkey
 	var vpm_numsDiv = "<div class='vpm_monkeynums'><input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-'><a href='#' id='vpm_monkeyUnits'>px</a><a href='#' id='vpm_arrowButton'><div id='vpm_arrow'></div></a></div>";
 	
-	$(vpm_numsDiv).appendTo($('body'));
+	// Define the Body
+	var vpm_body = $('body');
+	// Add the Monkey to the Body
+	$(vpm_numsDiv).appendTo(vpm_body);
 	
+	// Grab the main pieces with jQuery and store them in variables
 	var vpm_monkeynums = $('.vpm_monkeynums');
 	var vpm_monkeyReadout = $('.vpm_monkeyReadout');
 	var vpm_monkeyUnitsButton = $('#vpm_monkeyUnits');
 	var vpm_monkeyMoveButton = $('#vpm_arrowButton');
 	var vpm_monkeyMoveArrow = $('#vpm_arrow');
 
+	// Define the styles for the different pieces, so we dont' needs another stylesheet
+
+	// Styles for the Monkey background
 	vpm_monkeynums.css({
 		'background-color' : 'rgba(0,0,0,0.4)',
 		'font-family': 'sans-serif',
@@ -33,7 +41,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		'color': 'white',
 		'padding': '4px 14px',
 	});
-
+	// Styles for the Numbers Readout
 	vpm_monkeyReadout.css({
 		'background-color': 'transparent',
 		'border': 'none',
@@ -46,7 +54,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		'text-align': 'right',
 		'vertical-align': 'top'
 	});
-
+	// Styles for the Units Button
 	vpm_monkeyUnitsButton.css({
 		'padding': '4px',
 		'border': '1px solid #ff5a00',
@@ -60,7 +68,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		'text-align': 'center',
 		'margin-right': '8px'
 	});
-
+	// Styles for the Arrow Holder
 	vpm_monkeyMoveButton.css({
 		'display': 'inline-block',
 		'background': 'transparent',
@@ -69,12 +77,18 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		'vertical-align': 'bottom'
 	});
 
-	vpm_monkeyMoveArrow.hover(function (){
-		this.css({
+	// Rollover for the Arrow
+	vpm_monkeyMoveButton.hover(function (){
+		vpm_monkeyMoveArrow.css({
 			'border-bottom-color': '#895810'
+		});
+	}, function (){
+		vpm_monkeyMoveArrow.css({
+			'border-bottom-color': 'orange'
 		});
 	});
 
+	// Styles for the Arrow itself
 	vpm_monkeyMoveArrow.css({
 		'display': 'block',
 		'margin': '6px',
@@ -86,7 +100,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		'border-bottom': '16px solid orange'
 	});
 
-
+	// Starts the portion to move the Monkey around the screen
 	var initpos_v = initial_position_vert;
 	var initpos_h = initial_position_hori;
 	var ipos;
@@ -139,7 +153,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	});
 
 	function vpm_windowWidthOutput() {
-		$('input.vpm_monkeyReadout').val(vpm_windwidth);
+		vpm_monkeyReadout.val(vpm_windwidth);
 	};
 	
 	// Pulls the size of the viewport and converts to EMs if its set to show EMs
@@ -149,7 +163,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		var vpm_units = vpm_checkMonkeyUnits();
 		// If the toggle is set to EMs this if captures that and translated the numbers to EMs
 		if (vpm_units == 'em') {
-			var vpm_emSize = $('body').css('font-size');
+			var vpm_emSize = vpm_body.css('font-size');
 			var vpm_emWidth = vpm_windwidth / parseInt(vpm_emSize);
 			vpm_windwidth = vpm_emWidth; 
 		}
@@ -196,18 +210,26 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	}
 
 	// Move Button Event
-	vpm_movebtn.on("click", function(event){
+	vpm_monkeyMoveButton.on("click", function(event){
 		var thing = checkPostion();
 		vpm_setNewClass(positions[thing]);
 	});
 	
 	function vpm_setNewClass(pos) {
+		console.log(pos);
 		if (pos === 'topleft') {
 			vpm_monkeynums.css({
 				'top' : '3px',
 				'left' : '3px',
 				'right' : 'auto',
 				'bottom' : 'auto'
+			});
+			vpm_monkeyMoveArrow.css({
+				'-webkit-transform': 'rotate(90deg)',
+				'-moz-transform': 'rotate(90deg)',
+				'-ms-transform': 'rotate(90deg)',
+				'-o-transform': 'rotate(90deg)',
+				'-webkit-transform': 'rotate(90deg)'
 			});
 		}
 		if (pos === 'topright') {
@@ -217,6 +239,13 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 				'right' : '3px',
 				'bottom' : 'auto'
 			});
+			vpm_monkeyMoveArrow.css({
+				'-webkit-transform': 'rotate(180deg)',
+				'-moz-transform': 'rotate(180deg)',
+				'-ms-transform': 'rotate(180deg)',
+				'-o-transform': 'rotate(180deg)',
+				'-webkit-transform': 'rotate(180deg)'
+			});
 		}
 		if (pos === 'bottomleft') {
 			vpm_monkeynums.css({
@@ -225,6 +254,13 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 				'right' : 'auto',
 				'bottom' : '3px'
 			});
+			vpm_monkeyMoveArrow.css({
+				'-webkit-transform': 'rotate(0deg)',
+				'-moz-transform': 'rotate(0deg)',
+				'-ms-transform': 'rotate(0deg)',
+				'-o-transform': 'rotate(0deg)',
+				'-webkit-transform': 'rotate(0deg)'
+			});
 		}
 		if (pos === 'bottomright') {
 			vpm_monkeynums.css({
@@ -232,6 +268,13 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 				'left' : 'auto',
 				'right' : '3px',
 				'bottom' : '3px'
+			});
+			vpm_monkeyMoveArrow.css({
+				'-webkit-transform': 'rotate(-90deg)',
+				'-moz-transform': 'rotate(-90deg)',
+				'-ms-transform': 'rotate(-90deg)',
+				'-o-transform': 'rotate(-90deg)',
+				'-webkit-transform': 'rotate(-90deg)'
 			});
 		}
 	}

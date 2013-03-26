@@ -24,3 +24,9 @@ header {
   -moz-border-radius-topright: 6px;
   -webkit-border-top-right-radius: 6px;
   border-top-right-radius: 6px; }
+
+/* line 38, ../src/basic.scss */
+.themonkey {
+  margin: 0 auto;
+  display: block;
+  max-width: 100%; }
