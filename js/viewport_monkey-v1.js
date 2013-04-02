@@ -2,6 +2,9 @@
 	Viewport Monkey v1
 	Author: Jason Morgan
 	Twitter: @jaymorgan
+
+	Copyright (c) 2013 Jason Morgan (www.jmorgan.ws)
+	Dual licensed under the MIT and GPL licenses
 */
 
 // Send properties as "bottom", "top" for the vert prop
