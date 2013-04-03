@@ -219,11 +219,10 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	});
 	
 	function vpm_setNewClass(pos) {
-		console.log(pos);
 		if (pos === 'topleft') {
 			vpm_monkeynums.css({
-				'top' : '3px',
-				'left' : '3px',
+				'top' : '0px',
+				'left' : '0px',
 				'right' : 'auto',
 				'bottom' : 'auto'
 			});
@@ -237,9 +236,9 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		}
 		if (pos === 'topright') {
 			vpm_monkeynums.css({
-				'top' : '3px',
+				'top' : '0px',
 				'left' : 'auto',
-				'right' : '3px',
+				'right' : '0px',
 				'bottom' : 'auto'
 			});
 			vpm_monkeyMoveArrow.css({
@@ -253,9 +252,9 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		if (pos === 'bottomleft') {
 			vpm_monkeynums.css({
 				'top' : 'auto',
-				'left' : '3px',
+				'left' : '0px',
 				'right' : 'auto',
-				'bottom' : '3px'
+				'bottom' : '0px'
 			});
 			vpm_monkeyMoveArrow.css({
 				'-webkit-transform': 'rotate(0deg)',
@@ -269,8 +268,8 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 			vpm_monkeynums.css({
 				'top' : 'auto',
 				'left' : 'auto',
-				'right' : '3px',
-				'bottom' : '3px'
+				'right' : '0',
+				'bottom' : '0'
 			});
 			vpm_monkeyMoveArrow.css({
 				'-webkit-transform': 'rotate(-90deg)',
@@ -284,7 +283,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 }
 
 // Puts the monkey in the bottom left by default
-//
+
 vpm_viewportMonkeyInit('bottom', 'left');
 
 

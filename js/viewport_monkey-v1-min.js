@@ -35,11 +35,10 @@
             return w;
         }
         function N(e) {
-            console.log(e);
             if (e === "topleft") {
                 o.css({
-                    top: "3px",
-                    left: "3px",
+                    top: "0px",
+                    left: "0px",
                     right: "auto",
                     bottom: "auto"
                 });
@@ -53,9 +52,9 @@
             }
             if (e === "topright") {
                 o.css({
-                    top: "3px",
+                    top: "0px",
                     left: "auto",
-                    right: "3px",
+                    right: "0px",
                     bottom: "auto"
                 });
                 l.css({
@@ -69,9 +68,9 @@
             if (e === "bottomleft") {
                 o.css({
                     top: "auto",
-                    left: "3px",
+                    left: "0px",
                     right: "auto",
-                    bottom: "3px"
+                    bottom: "0px"
                 });
                 l.css({
                     "-webkit-transform": "rotate(0deg)",
@@ -85,8 +84,8 @@
                 o.css({
                     top: "auto",
                     left: "auto",
-                    right: "3px",
-                    bottom: "3px"
+                    right: "0",
+                    bottom: "0"
                 });
                 l.css({
                     "-webkit-transform": "rotate(-90deg)",
