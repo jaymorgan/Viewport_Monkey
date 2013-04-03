@@ -19,7 +19,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	});
 	
 	// The Monkey
-	var vpm_numsDiv = "<div class='vpm_monkeynums'><input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-'><a href='#' id='vpm_monkeyUnits'>px</a><a href='#' id='vpm_arrowButton'><div id='vpm_arrow'></div></a></div>";
+	var vpm_numsDiv = "<div id='vpm_monkeyHolder'><div id='vpm_theMonkey'><input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-'><a href='#' id='vpm_monkeyUnits'>px</a><a href='#' id='vpm_arrowButton'><div id='vpm_arrow'></div></a></div></div>";
 	
 	// Define the Body
 	var vpm_body = $('body');
@@ -27,7 +27,8 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	$(vpm_numsDiv).appendTo(vpm_body);
 	
 	// Grab the main pieces with jQuery and store them in variables
-	var vpm_monkeynums = $('.vpm_monkeynums');
+	var vpm_monkeyHolder = $('#vpm_monkeyHolder');
+	var vpm_theMonkey = $('#vpm_theMonkey');
 	var vpm_monkeyReadout = $('.vpm_monkeyReadout');
 	var vpm_monkeyUnitsButton = $('#vpm_monkeyUnits');
 	var vpm_monkeyMoveButton = $('#vpm_arrowButton');
@@ -36,7 +37,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	// Define the styles for the different pieces, so we dont' needs another stylesheet
 
 	// Styles for the Monkey background
-	vpm_monkeynums.css({
+	vpm_theMonkey.css({
 		'background-color' : 'rgba(0,0,0,0.4)',
 		'font-family': 'sans-serif',
 		'font-weight' : 'bolder',
@@ -204,23 +205,21 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	var currentPosition = postest;
 	
 	function checkPostion(){
-		var oldClass = positions[currentPosition];
+		pos = currentPosition % 4;
+		var oldClass = positions[pos];
 		currentPosition++;
-		if(currentPosition >= positions.length){
-			currentPosition =0;
-		}
-		return currentPosition;
+		return currentPosition % 4;
 	}
 
 	// Move Button Event
 	vpm_monkeyMoveButton.on("click", function(event){
-		var thing = checkPostion();
-		vpm_setNewClass(positions[thing]);
+		
+		vpm_setNewClass(positions[checkPostion()]);
 	});
 	
 	function vpm_setNewClass(pos) {
 		if (pos === 'topleft') {
-			vpm_monkeynums.css({
+			vpm_theMonkey.css({
 				'top' : '0px',
 				'left' : '0px',
 				'right' : 'auto',
@@ -235,7 +234,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 			});
 		}
 		if (pos === 'topright') {
-			vpm_monkeynums.css({
+			vpm_theMonkey.css({
 				'top' : '0px',
 				'left' : 'auto',
 				'right' : '0px',
@@ -250,7 +249,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 			});
 		}
 		if (pos === 'bottomleft') {
-			vpm_monkeynums.css({
+			vpm_theMonkey.css({
 				'top' : 'auto',
 				'left' : '0px',
 				'right' : 'auto',
@@ -265,7 +264,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 			});
 		}
 		if (pos === 'bottomright') {
-			vpm_monkeynums.css({
+			vpm_theMonkey.css({
 				'top' : 'auto',
 				'left' : 'auto',
 				'right' : '0',
@@ -279,6 +278,39 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 				'-webkit-transform': 'rotate(-90deg)'
 			});
 		}
+	}
+
+	function spin_vpm_theMonkey (howManyDegs) {
+		deggers = howManyDegs+"deg";
+		if (howManyDegs==0) {o = "1"} else {o = "0"};
+		vpm_theMonkey.css({
+			'-webkit-transform': 'rotateX(' + deggers + ')',
+			'-moz-transform': 'rotateX(' + deggers + ')',
+			'-ms-transform': 'rotateX(' + deggers + ')',
+			'-o-transform': 'rotateX(' + deggers + ')',
+			'transform': 'rotateX(' + deggers + ')',
+			'opacity': o
+		});
+	}
+
+	function set_origin (direction) {
+		if (direction == "up") {
+			vpm_theMonkey.css({
+				"-webkit-transform-origin": "top right",
+				"-moz-transform-origin": "top right",
+				"-ms-transform-origin": "top right",
+				"-o-transform-origin": "top right",
+				"transform-origin": "top right"
+			});
+		} else {
+			vpm_theMonkey.css({
+				"-webkit-transform-origin": "bottom left",
+				"-moz-transform-origin": "bottom left",
+				"-ms-transform-origin": "bottom left",
+				"-o-transform-origin": "bottom left",
+				"transform-origin": "bottom left"
+			});
+		};
 	}
 }
 

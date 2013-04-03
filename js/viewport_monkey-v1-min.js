@@ -10,39 +10,40 @@
 // If not set or not set correctly they will default to the bottom left
 (function(e) {
     function t(t, n) {
-        function E() {
-            u.val(m);
-        }
         function S() {
-            var e, t, n;
-            m = v.width();
-            e = x();
-            if (e == "em") {
-                t = s.css("font-size");
-                n = m / parseInt(t);
-                m = n;
-            }
-            E();
+            a.val(g);
         }
         function x() {
-            var e = a.html();
-            return e;
+            var e, t, n;
+            g = m.width();
+            e = T();
+            if (e == "em") {
+                t = s.css("font-size");
+                n = g / parseInt(t);
+                g = n;
+            }
+            S();
         }
         function T() {
-            var e = y[w];
-            w++;
-            w >= y.length && (w = 0);
-            return w;
+            var e = f.html();
+            return e;
         }
-        function N(e) {
+        function N() {
+            var e;
+            pos = E % 4;
+            e = b[pos];
+            E++;
+            return E % 4;
+        }
+        function C(e) {
             if (e === "topleft") {
-                o.css({
+                u.css({
                     top: "0px",
                     left: "0px",
                     right: "auto",
                     bottom: "auto"
                 });
-                l.css({
+                c.css({
                     "-webkit-transform": "rotate(90deg)",
                     "-moz-transform": "rotate(90deg)",
                     "-ms-transform": "rotate(90deg)",
@@ -51,13 +52,13 @@
                 });
             }
             if (e === "topright") {
-                o.css({
+                u.css({
                     top: "0px",
                     left: "auto",
                     right: "0px",
                     bottom: "auto"
                 });
-                l.css({
+                c.css({
                     "-webkit-transform": "rotate(180deg)",
                     "-moz-transform": "rotate(180deg)",
                     "-ms-transform": "rotate(180deg)",
@@ -66,13 +67,13 @@
                 });
             }
             if (e === "bottomleft") {
-                o.css({
+                u.css({
                     top: "auto",
                     left: "0px",
                     right: "auto",
                     bottom: "0px"
                 });
-                l.css({
+                c.css({
                     "-webkit-transform": "rotate(0deg)",
                     "-moz-transform": "rotate(0deg)",
                     "-ms-transform": "rotate(0deg)",
@@ -81,13 +82,13 @@
                 });
             }
             if (e === "bottomright") {
-                o.css({
+                u.css({
                     top: "auto",
                     left: "auto",
                     right: "0",
                     bottom: "0"
                 });
-                l.css({
+                c.css({
                     "-webkit-transform": "rotate(-90deg)",
                     "-moz-transform": "rotate(-90deg)",
                     "-ms-transform": "rotate(-90deg)",
@@ -96,17 +97,18 @@
                 });
             }
         }
-        var r, s, o, u, a, f, l, c, h, p, d, v, m, g, y, b, w;
+        var r, s, o, u, a, f, l, c, h, p, d, v, m, g, y, b, w, E;
         e(document).ready(function() {});
-        r = "<div class='vpm_monkeynums'><input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-'><a href='#' id='vpm_monkeyUnits'>px</a><a href='#' id='vpm_arrowButton'><div id='vpm_arrow'></div></a></div>";
+        r = "<div id='vpm_monkeyHolder'><div id='vpm_theMonkey'><input type='counter' name='wSRcounter' class='vpm_monkeyReadout' value='-init-'><a href='#' id='vpm_monkeyUnits'>px</a><a href='#' id='vpm_arrowButton'><div id='vpm_arrow'></div></a></div></div>";
         s = e("body");
         e(r).appendTo(s);
-        o = e(".vpm_monkeynums");
-        u = e(".vpm_monkeyReadout");
-        a = e("#vpm_monkeyUnits");
-        f = e("#vpm_arrowButton");
-        l = e("#vpm_arrow");
-        o.css({
+        o = e("#vpm_monkeyHolder");
+        u = e("#vpm_theMonkey");
+        a = e(".vpm_monkeyReadout");
+        f = e("#vpm_monkeyUnits");
+        l = e("#vpm_arrowButton");
+        c = e("#vpm_arrow");
+        u.css({
             "background-color": "rgba(0,0,0,0.4)",
             "font-family": "sans-serif",
             "font-weight": "bolder",
@@ -114,7 +116,7 @@
             color: "white",
             padding: "4px 14px"
         });
-        u.css({
+        a.css({
             "background-color": "transparent",
             border: "none",
             width: "60px",
@@ -126,7 +128,7 @@
             "text-align": "right",
             "vertical-align": "top"
         });
-        a.css({
+        f.css({
             padding: "4px",
             border: "1px solid #ff5a00",
             background: "rgba(#333333, 0.5)",
@@ -139,23 +141,23 @@
             "text-align": "center",
             "margin-right": "8px"
         });
-        f.css({
+        l.css({
             display: "inline-block",
             background: "transparent",
             padding: "0",
             "text-align": "center",
             "vertical-align": "bottom"
         });
-        f.hover(function() {
-            l.css({
+        l.hover(function() {
+            c.css({
                 "border-bottom-color": "#895810"
             });
         }, function() {
-            l.css({
+            c.css({
                 "border-bottom-color": "orange"
             });
         });
-        l.css({
+        c.css({
             display: "block",
             margin: "6px",
             padding: "0",
@@ -165,37 +167,36 @@
             "border-right": "8px solid transparent",
             "border-bottom": "16px solid orange"
         });
-        c = t;
-        h = n;
-        c === "bottom" ? h === "left" ? p = "bottomleft" : h === "right" ? p = "bottomright" : p = "bottomleft" : c === "top" ? h === "left" ? p = "topleft" : h === "right" ? p = "topright" : p = "bottomleft" : p = "bottomleft";
-        d = e("#vpm_monkeyUnits");
-        v = e(window);
-        g = e(".vpm_changepos");
-        v.on("resize", function() {
-            S();
+        h = t;
+        p = n;
+        h === "bottom" ? p === "left" ? d = "bottomleft" : p === "right" ? d = "bottomright" : d = "bottomleft" : h === "top" ? p === "left" ? d = "topleft" : p === "right" ? d = "topright" : d = "bottomleft" : d = "bottomleft";
+        v = e("#vpm_monkeyUnits");
+        m = e(window);
+        y = e(".vpm_changepos");
+        m.on("resize", function() {
+            x();
         });
-        v.on("load", function() {
-            S();
+        m.on("load", function() {
+            x();
         });
-        d.on("change", function() {
-            S();
+        v.on("change", function() {
+            x();
         });
-        a.on("click", function(e) {
+        f.on("click", function(e) {
             e.preventDefault();
             this.innerHTML == "px" ? this.innerHTML = "em" : this.innerHTML = "px";
-            S();
+            x();
         });
         Array.prototype.contains = function(e) {
             for (i in this) if (this[i] == e) return i;
             return "x";
         };
-        y = [ "bottomleft", "topleft", "topright", "bottomright" ];
-        b = y.contains(p);
-        b != "x" ? N(y[b]) : N(y[b]);
-        w = b;
-        f.on("click", function() {
-            var e = T();
-            N(y[e]);
+        b = [ "bottomleft", "topleft", "topright", "bottomright" ];
+        w = b.contains(d);
+        w != "x" ? C(b[w]) : C(b[w]);
+        E = w;
+        l.on("click", function() {
+            C(b[N()]);
         });
     }
     t("bottom", "left");
