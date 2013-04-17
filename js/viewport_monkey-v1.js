@@ -7,6 +7,7 @@
 	Dual licensed under the MIT and GPL licenses
 */
 
+// TO INITIATE - vpm_viewportMonkeyInit('top', 'left');
 // Send properties as "bottom", "top" for the vert prop
 // Send "left" and "right" for the horizontal prop
 // If not set or not set correctly they will default to the bottom left
@@ -36,20 +37,48 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 
 	// Define the styles for the different pieces, so we dont' needs another stylesheet
 
+	// Styles for the monkeyHolder
+	vpm_monkeyHolder.css({
+		'position': 'fixed',
+		'-webkit-perspective': '750',
+		'-moz-perspective': '750',
+		'-ms-perspective': '750',
+		'-o-perspective': '750',
+		'perspective': '750',
+		'bottom': '0',
+		'left': '0'
+	});
 	// Styles for the Monkey background
 	vpm_theMonkey.css({
 		'background-color' : 'rgba(0,0,0,0.4)',
 		'font-family': 'sans-serif',
 		'font-weight' : 'bolder',
-		'position': 'absolute',
-		'color': 'white',
 		'padding': '4px 14px',
+		'box-sizing': 'border-box',
+		'-webkit-transform-style': 'preserve-3D',
+		'-moz-transform-style': 'preserve-3D',
+		'-o-transform-style': 'preserve-3D',
+		'transform-style': 'preserve-3D',
+		'-webkit-transition-property': '-webkit-transform, opacity',
+		'-moz-transition-property': '-moz-transform, opacity',
+		'-o-transition-property': '-o-transform, opacity',
+		'transition-property': 'transform, opacity',
+		'-webkit-transition-duration': '0.3s',
+		'-moz-transition-duration': '0.3s',
+		'-o-transition-duration': '0.3s',
+		'transition-duration': '0.3s',
+		'-webkit-transition-timing-function': 'ease-in-out',
+		'-moz-transition-timing-function': 'ease-in-out',
+		'-o-transition-timing-function': 'ease-in-out',
+		'transition-timing-function': 'ease-in-out',
+		'box-shadow': 'rgba(120, 120, 120, 0.3) 2px 2px 4px'
 	});
+	
 	// Styles for the Numbers Readout
 	vpm_monkeyReadout.css({
 		'background-color': 'transparent',
 		'border': 'none',
-		'width': '60px',
+		'width': '100px',
 		'margin': '0',
 		'padding': '2px 8px 0 0',
 		'color': 'orange',
@@ -107,31 +136,31 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	// Starts the portion to move the Monkey around the screen
 	var initpos_v = initial_position_vert;
 	var initpos_h = initial_position_hori;
-	var ipos;
+	var initial_position;
 
 	if(initpos_v === "bottom"){
 		if (initpos_h === "left") {
-			ipos = "bottomleft";
+			initial_position = "bottomleft";
 		} else if (initpos_h === "right") {
-			ipos = "bottomright";
+			initial_position = "bottomright";
 		} else {
 			// Something went wrong! Set to default
-			ipos = "bottomleft";
+			initial_position = "bottomleft";
 		}
 	} else if (initpos_v === "top") {
 		if (initpos_h === "left") {
-			ipos = "topleft";
+			initial_position = "topleft";
 		} else if (initpos_h === "right") {
-			ipos = "topright";
+			initial_position = "topright";
 		} else {
 			// Something went wrong! Set to default
-			ipos = "bottomleft";
+			initial_position = "bottomleft";
 		}
 	} else {
 		// Something went wrong! Set to default
-		ipos = "bottomleft";
+		initial_position = "bottomleft";
 	}
-	
+	console.log('initial_position = ' + initial_position);
 	var vpm_monkeySelector = $('#vpm_monkeyUnits');
 	var vpm_win = $(window);
 	var vpm_windwidth;
@@ -193,14 +222,9 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	var positions = ['bottomleft', 'topleft', 'topright', 'bottomright'];
 	
 	// Find the position as sent from the props at top
-	var postest = positions.contains(ipos);
-
-	if (postest != 'x') {
-		vpm_setNewClass(positions[postest]);
-	} else {
-		vpm_setNewClass(positions[postest]);
-	}
+	var postest = positions.contains(initial_position);
 	
+	console.log('1 postest = ' + postest);
 	//	Stores the current index of the positions array
 	var currentPosition = postest;
 	
@@ -208,77 +232,151 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 		pos = currentPosition % 4;
 		var oldClass = positions[pos];
 		currentPosition++;
-		return currentPosition % 4;
+		console.log('checker = ' + oldClass);
+		return oldClass;
 	}
+
+	// For intial Load
+	x = checkPostion();
+	vpm_set_styles(x);
 
 	// Move Button Event
 	vpm_monkeyMoveButton.on("click", function(event){
-		
-		vpm_setNewClass(positions[checkPostion()]);
+		x = checkPostion();
+		vpm_set_styles(x);
 	});
 	
-	function vpm_setNewClass(pos) {
-		if (pos === 'topleft') {
-			vpm_theMonkey.css({
-				'top' : '0px',
-				'left' : '0px',
-				'right' : 'auto',
-				'bottom' : 'auto'
-			});
-			vpm_monkeyMoveArrow.css({
-				'-webkit-transform': 'rotate(90deg)',
-				'-moz-transform': 'rotate(90deg)',
-				'-ms-transform': 'rotate(90deg)',
-				'-o-transform': 'rotate(90deg)',
-				'-webkit-transform': 'rotate(90deg)'
-			});
-		}
-		if (pos === 'topright') {
-			vpm_theMonkey.css({
-				'top' : '0px',
-				'left' : 'auto',
-				'right' : '0px',
-				'bottom' : 'auto'
-			});
-			vpm_monkeyMoveArrow.css({
-				'-webkit-transform': 'rotate(180deg)',
-				'-moz-transform': 'rotate(180deg)',
-				'-ms-transform': 'rotate(180deg)',
-				'-o-transform': 'rotate(180deg)',
-				'-webkit-transform': 'rotate(180deg)'
-			});
-		}
-		if (pos === 'bottomleft') {
-			vpm_theMonkey.css({
-				'top' : 'auto',
-				'left' : '0px',
-				'right' : 'auto',
-				'bottom' : '0px'
-			});
-			vpm_monkeyMoveArrow.css({
-				'-webkit-transform': 'rotate(0deg)',
-				'-moz-transform': 'rotate(0deg)',
-				'-ms-transform': 'rotate(0deg)',
-				'-o-transform': 'rotate(0deg)',
-				'-webkit-transform': 'rotate(0deg)'
-			});
-		}
-		if (pos === 'bottomright') {
-			vpm_theMonkey.css({
-				'top' : 'auto',
-				'left' : 'auto',
-				'right' : '0',
-				'bottom' : '0'
-			});
-			vpm_monkeyMoveArrow.css({
-				'-webkit-transform': 'rotate(-90deg)',
-				'-moz-transform': 'rotate(-90deg)',
-				'-ms-transform': 'rotate(-90deg)',
-				'-o-transform': 'rotate(-90deg)',
-				'-webkit-transform': 'rotate(-90deg)'
-			});
+	function position_monkey_holder_at ( send_to_position ) {
+
+		switch (send_to_position)
+		{
+			case 'bottomright':
+				vpm_monkeyHolder.css({
+					'top': 'auto',
+					'bottom': '0',
+					'right': '0',
+					'left': 'auto' });
+				break;
+			case 'bottomleft':
+				vpm_monkeyHolder.css({
+					'top': 'auto',
+					'bottom': '0',
+					'right': 'auto',
+					'left': '0' });
+			case 'topleft':
+				vpm_monkeyHolder.css({
+					'top': '0',
+					'bottom': 'auto',
+					'right': 'auto',
+					'left': '0' });
+			case 'topright':
+				vpm_monkeyHolder.css({
+					'top': '0',
+					'bottom': 'auto',
+					'right': '0',
+					'left': 'auto' });
 		}
 	}
+
+	function vpm_set_styles (pos) {
+		switch (pos)
+		{
+			case 'topright':
+				spin_vpm_theMonkey(-90);
+				vpm_monkeyHolder.delay(320).
+					queue(function(next){
+						position_monkey_holder_at('bottomright');
+						vpm_monkeyMoveArrow.css({
+							'-webkit-transform': 'rotate(-90deg)',
+							'-moz-transform': 'rotate(-90deg)',
+							'-ms-transform': 'rotate(-90deg)',
+							'-o-transform': 'rotate(-90deg)',
+							'-webkit-transform': 'rotate(-90deg)'
+						});
+						next();
+					}).
+					queue(function(next){
+						spin_vpm_theMonkey(90);
+						next();
+					}).
+					delay(400).
+					queue(function(next){
+						set_origin("dn");
+						spin_vpm_theMonkey(0);
+						next();
+					});
+				break;
+			case 'bottomright':
+				spin_vpm_theMonkey(90);
+				vpm_monkeyHolder.delay(320).
+					queue(function(next){
+						position_monkey_holder_at('bottomleft');
+						vpm_monkeyMoveArrow.css({
+							'-webkit-transform': 'rotate(0deg)',
+							'-moz-transform': 'rotate(0deg)',
+							'-ms-transform': 'rotate(0deg)',
+							'-o-transform': 'rotate(0deg)',
+							'-webkit-transform': 'rotate(0deg)'
+						});
+						next();
+					}).
+					queue(function(next){
+						spin_vpm_theMonkey(0);
+						next();
+					});
+				break;
+			case 'bottomleft':
+				spin_vpm_theMonkey(90);
+				vpm_monkeyHolder.delay(320).
+					queue(function(next){
+						position_monkey_holder_at('topleft');
+						vpm_monkeyMoveArrow.css({
+							'-webkit-transform': 'rotate(90deg)',
+							'-moz-transform': 'rotate(90deg)',
+							'-ms-transform': 'rotate(90deg)',
+							'-o-transform': 'rotate(90deg)',
+							'-webkit-transform': 'rotate(90deg)'
+						});
+						next();
+					}).
+					queue(function(next){
+						spin_vpm_theMonkey(-90);
+						next();
+					}).
+					delay(0).
+					queue(function(next){
+						set_origin("up");
+						spin_vpm_theMonkey(0);
+						next();
+					});
+
+				break;
+			// default is 'top-left'
+			default:
+				set_origin("up");
+			  	spin_vpm_theMonkey(-90);
+			  	vpm_monkeyHolder.delay(320).queue(function(next){
+		    		vpm_monkeyHolder.css({
+		    			'top': '0',
+		    			'bottom': 'auto',
+		    			'right': '0',
+		    			'left': 'auto'
+		    		});
+		    		vpm_monkeyMoveArrow.css({
+		    			'-webkit-transform': 'rotate(180deg)',
+		    			'-moz-transform': 'rotate(180deg)',
+		    			'-ms-transform': 'rotate(180deg)',
+		    			'-o-transform': 'rotate(180deg)',
+		    			'-webkit-transform': 'rotate(180deg)'
+		    		});
+					next();
+				}).queue(function(next){
+					spin_vpm_theMonkey(0);
+					next();
+				});
+		}
+	}
+
 
 	function spin_vpm_theMonkey (howManyDegs) {
 		deggers = howManyDegs+"deg";
@@ -294,6 +392,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 	}
 
 	function set_origin (direction) {
+		console.log('set_origin');
 		if (direction == "up") {
 			vpm_theMonkey.css({
 				"-webkit-transform-origin": "top right",
@@ -316,7 +415,7 @@ function vpm_viewportMonkeyInit(initial_position_vert, initial_position_hori) {
 
 // Puts the monkey in the bottom left by default
 
-vpm_viewportMonkeyInit('bottom', 'left');
+vpm_viewportMonkeyInit('top', 'left');
 
 
 
